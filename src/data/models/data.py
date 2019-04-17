@@ -13,6 +13,9 @@ class Data(CRUDModel):
     typ = Column(String, nullable=False, index=True)#1=hovezi,2=vepr,3=kure
     hodnota = Column(Float, nullable=False, index=False)#1=predni,2=zadni
     cas = Column(DateTime, nullable=True,default=0)
+    diskusage = Column(Integer, nullable=True, default=0)
+    netioin = Column(Integer, nullable=True, default=0)
+    netioout = Column(Integer, nullable=True, default=0)
     # Use custom constructor
     # pylint: disable=W0231
     def __init__(self, **kwargs):

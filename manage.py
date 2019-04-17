@@ -112,7 +112,10 @@ def sensor():
     cas = datetime.fromtimestamp(float(data["data"]["cas"]))
     i = Data(typ=data["data"]["nadpis"],
              hodnota=float(data["data"]["CPU"]),
-             cas=cas)
+             cas=cas,
+             diskusage=data["data"]["DISKUSAGE"],
+             netioin=data["data"]["NETIOIN"],
+             netioout = data["data"]["NETIOOUT"])
     db.session.add(i)
     db.session.commit()
     print "data ulozena"

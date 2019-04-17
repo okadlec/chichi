@@ -8,8 +8,8 @@
 
 <body>
   <center>
-    <h1>{{ title }}</h1>
-
+    <h1>CPU</h1>
+    CPU
     <canvas id="chart" width="1000" height="800"></canvas>
     <script>
       // bar chart data
@@ -64,6 +64,137 @@
         bezierCurve: false,
       });
     </script>
+    <br>
+    <h1>Diskusage</h1>
+    <canvas id="chart2" width="1000" height="800"></canvas>
+    <script>
+      // bar chart data
+      var barData = {
+        labels : [
+          {% for item in data %}
+            "{{ item['cas'] }}",
+          {% endfor %}
+      ]
+        ,
+        datasets : [{
+          fillColor: "rgba(151,187,205,0.2)",
+          strokeColor: "rgba(151,187,205,1)",
+          pointColor: "rgba(151,187,205,1)",
+          pointStrokeColor: "#fff",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(151,187,205,1)",
+          bezierCurve : false,
+          data :[
+          {% for item in data %}
+            {{ item['diskusage'] }},
+          {% endfor %}
+      ]
+          }
+	]
+      }
+      Chart.defaults.global.animationSteps = 50;
+      Chart.defaults.global.tooltipYPadding = 16;
+      Chart.defaults.global.tooltipCornerRadius = 0;
+      Chart.defaults.global.tooltipTitleFontStyle = "normal";
+      Chart.defaults.global.tooltipFillColor = "rgba(0,0,0,0.8)";
+      Chart.defaults.global.animationEasing = "easeOutBounce";
+      Chart.defaults.global.responsive = false;
+      Chart.defaults.global.scaleLineColor = "black";
+      Chart.defaults.global.scaleFontSize = 16;
+      // get bar chart canvas
+      var mychart = document.getElementById("chart2").getContext("2d");
+      steps = 10
+      max = 100000000
+      //{{ max }}
+      // draw bar chart
+      var LineChartDemo = new Chart(mychart).Line(barData,
+              {
+        scaleOverride: true,
+        scaleSteps: steps,
+        scaleStepWidth: Math.ceil(max / steps),
+        scaleStartValue: 0,
+        scaleShowVerticalLines: true,
+        scaleShowGridLines : true,
+        barShowStroke : true,
+        scaleShowLabels: true,
+        bezierCurve: false,
+      });
+    </script>
+
+    <h1>Network</h1>
+    <canvas id="chart4" width="1000" height="800"></canvas>
+    <script>
+      // bar chart data
+      var barData = {
+        labels : [
+          {% for item in data %}
+            "{{ item['cas'] }}",
+          {% endfor %}
+      ]
+        ,
+        datasets : [{
+          fillColor: "rgba(151,187,205,0.2)",
+          strokeColor: "rgba(151,187,205,1)",
+          pointColor: "rgba(151,187,205,1)",
+          pointStrokeColor: "#fff",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(151,187,205,1)",
+          bezierCurve : false,
+          data :[
+          {% for item in data %}
+            {{ item['netioout'] }},
+          {% endfor %}
+      ]
+          },
+        {
+          fillColor: "rgba(300,187,205,0.2)",
+          strokeColor: "rgba(300,187,205,1)",
+          pointColor: "rgba(30,187,205,1)",
+          pointStrokeColor: "#fff",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(151,187,205,1)",
+          bezierCurve : false,
+          data :[
+          {% for item in data %}
+            {{ item['netioin'] }},
+          {% endfor %}
+      ]
+          }
+	]
+      }
+      Chart.defaults.global.animationSteps = 50;
+      Chart.defaults.global.tooltipYPadding = 16;
+      Chart.defaults.global.tooltipCornerRadius = 0;
+      Chart.defaults.global.tooltipTitleFontStyle = "normal";
+      Chart.defaults.global.tooltipFillColor = "rgba(0,0,0,0.8)";
+      Chart.defaults.global.animationEasing = "easeOutBounce";
+      Chart.defaults.global.responsive = false;
+      Chart.defaults.global.scaleLineColor = "black";
+      Chart.defaults.global.scaleFontSize = 16;
+      // get bar chart canvas
+      var mychart = document.getElementById("chart4").getContext("2d");
+      steps = 10
+      max = 500000000
+      //{{ max }}
+      // draw bar chart
+      var LineChartDemo = new Chart(mychart).Line(barData,
+              {
+        scaleOverride: true,
+        scaleSteps: steps,
+        scaleStepWidth: Math.ceil(max / steps),
+        scaleStartValue: 0,
+        scaleShowVerticalLines: true,
+        scaleShowGridLines : true,
+        barShowStroke : true,
+        scaleShowLabels: true,
+        bezierCurve: false,
+      });
+    </script>
+
+
+
+
+
   </center>
 </body>
 </html>
